@@ -1,4 +1,5 @@
 import React from "react";
+import AnimeCard from "./AnimeCard";
 
 
 function Home() {
