@@ -11,6 +11,7 @@ function Home({logout}) {
     const [animes, setAnimes] = useState([])
     const [errors, setErrors] = useState('')
 
+
     useEffect(()=> {
         fetch("/all_animes")
         .then(resp => {
@@ -22,12 +23,12 @@ function Home({logout}) {
         })
     },[])
 
+   
 
     return (
         <div>
-            <NavBar logout={logout}/>
+            <h1>Popular Animes:</h1>
             {animes.map((anime)=> <AnimeCard key={anime.animeId} anime={anime}/>)}
-           
 
         </div>
     )

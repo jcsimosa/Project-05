@@ -7,6 +7,10 @@ import { NotFound } from './NotFound';
 import Signup from './Signup';
 import Home from './Home';
 import AboutUs from './AboutUs';
+import ActionAnime from './ActionAnime';
+import HorrorAnime from './HorrorAnime';
+import NavBar from './NavBar';
+import Comments from './Comments';
 
 
 
@@ -52,9 +56,26 @@ function App() {
     });
   }, []);
   console.log(user)
+
+  const [actionAnimes, setActionAnimes] = useState([])
+  const [errors, setErrors] = useState('')  
+
+  useEffect(()=> {
+      fetch("/action_animes")
+      .then(resp => {
+          if (resp.ok){
+              resp.json().then(setActionAnimes)
+          } else {
+              resp.json().then(data => setErrors(data.error))
+          }
+      })
+  },[])
+
+
   return (
 
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
+      {user ? <NavBar logout={logout}/>:null}
       <Routes>
 
         <Route index element={ <Login setUser={setUser}/>} />
@@ -62,12 +83,15 @@ function App() {
         <Route path="Home"> 
           <Route index element= {
             <AuthRoute user={user}>
-              <Home logout={logout}/>
+              <Home />
             </AuthRoute>
           }/>
-          <Route path="aboutus" element= {<AboutUs /> } />
-        </Route>
 
+          <Route path="aboutus" element= {<AboutUs /> } />
+          <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
+          <Route path="Horror" element={<HorrorAnime />}/>
+        </Route>
+          <Route path="anime/:id" element={<Comments />}/>
         <Route path='*' element={<NotFound />} />
 
       </Routes>

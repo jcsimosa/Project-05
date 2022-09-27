@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         user = User.create!(user_params)
         render json:user, status: :created
     end
+    
     def destroy 
        session.delete :user_id
     end

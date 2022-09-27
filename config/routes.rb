@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
 
   post "/login", to: "sessions#create"
+
+  get "action_animes", to: "animes#action_from_api"
+
+  get "horror_animes", to: "animes#horror_from_api"
+
 end

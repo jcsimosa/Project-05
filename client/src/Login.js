@@ -21,11 +21,11 @@ function Login({setUser}){
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(user)
         })
-        .then(r => {
-            if(r.ok){
-                r.json().then(r => {
-                    setUser(true)
-                    navigate('/home')
+            .then(r => {
+                if(r.ok){
+                    r.json().then(r => {
+                        setUser(true)
+                        navigate('/home')
                 })
             }
         })
