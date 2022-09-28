@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"
+import {Link, Navigate, useNavigate} from "react-router-dom"
+
 
 
 function Signup({setUser}) {
@@ -7,6 +8,7 @@ function Signup({setUser}) {
     const [name, setName] = useState('')
     const[username, setUsername] = useState ('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
     
     
     const handleSubmit = (e)=> {
@@ -25,6 +27,7 @@ function Signup({setUser}) {
             if (r.ok){
                 r.json().then(r => {
                     setUser(true)
+                    navigate("/home")
                 })
             }else {
                 r.json().then(json =>console.log(Object.entries(json.errors)))

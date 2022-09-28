@@ -49,3 +49,4 @@ end
 gem "rest-client"
 gem "net-http", "~> 0.2.2"
 gem 'active_model_serializers'
+gem "byebug"

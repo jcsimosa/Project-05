@@ -10,7 +10,8 @@ import AboutUs from './AboutUs';
 import ActionAnime from './ActionAnime';
 import HorrorAnime from './HorrorAnime';
 import NavBar from './NavBar';
-import Comments from './Comments';
+import Anime from './Anime';
+import CreateAnime from "./CreateAnime"
 
 
 
@@ -18,7 +19,7 @@ const AuthRoute = ({children, user}) => {
   const navigate = useNavigate()
   useEffect ( () => {
     if (!user) {
-      navigate("/login")
+      navigate("/")
     }
   })
 
@@ -33,7 +34,10 @@ const AuthRoute = ({children, user}) => {
 function App() {
   
   const [user, setUser] = useState(false)
+  const [loading , setLoading] = useState(true)
+
   const[currentUser, setCurrentUser] = useState(null)
+
   let navigate = useNavigate()
   
   const logout = () => {
@@ -45,6 +49,7 @@ function App() {
 
   useEffect(() => {
     fetch("/me").then((res) => {
+      setLoading(false)
       if (res.ok) {
         res.json().then((user) => {
           setCurrentUser(user);
@@ -56,6 +61,7 @@ function App() {
     });
   }, []);
   console.log(user)
+  console.log(currentUser)
 
   const [actionAnimes, setActionAnimes] = useState([])
   const [errors, setErrors] = useState('')  
@@ -71,7 +77,13 @@ function App() {
       })
   },[])
 
-
+  if (loading) {
+    return (
+      <>
+      <p>"Loading"</p>
+      </>
+    );
+  }
   return (
 
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
@@ -90,8 +102,9 @@ function App() {
           <Route path="aboutus" element= {<AboutUs /> } />
           <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
           <Route path="Horror" element={<HorrorAnime />}/>
+          <Route path="Create" element={<CreateAnime />}/>
         </Route>
-          <Route path="anime/:id" element={<Comments />}/>
+          <Route path="animes/:id" element={<Anime />}/>
         <Route path='*' element={<NotFound />} />
 
       </Routes>

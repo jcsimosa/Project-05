@@ -4,6 +4,7 @@ import{useState} from "react"
 
 
 
+
 function AnimeCard({anime}) {
 
     const [comment, setComment] = useState('')
@@ -52,15 +53,14 @@ function AnimeCard({anime}) {
              
         // },
 
-
         
     return (
         
         <div>
+                <Link to={`/animes/${id}`}>
                 <p>Name: {anime.animeTitle}</p>
-                
+                </Link>   
                 <img src={anime.animeImg} onClick={toggleForm}></img>
-                
                 <p>released:{anime.releasedDate}</p>
                 {showForm ? 
                 <form onSubmit={submitcomment}>

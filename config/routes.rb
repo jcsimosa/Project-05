@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   get "horror_animes", to: "animes#horror_from_api"
 
+  # get "/animes/:animeId", to: "animes#show"
 end
