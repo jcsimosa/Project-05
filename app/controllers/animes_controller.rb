@@ -21,8 +21,13 @@ class AnimesController < ApplicationController
         animes = Anime.all 
         render json: animes
     end
-    # def create 
-    #     anime = Anime.create()
-    # end
+    def create 
+        anime = Anime.create()
+        render json: anime, status: :created
+    end
 
+    private 
+    def anime_params
+        params.permit(:animeTitle,:animeImg,:releasedDate)
+    end
 end

@@ -48,9 +48,6 @@ function Reviews({review,deleteComment,update}) {
     }
 
 
-
-   
-    console.log(render)
     function showForm(e) {
         setToggleForm(!toggleForm)
     }

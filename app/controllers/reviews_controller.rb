@@ -10,12 +10,14 @@ class ReviewsController < ApplicationController
     end
     
     def create 
+        byebug
         user = current_user
         anime = Anime.find_or_create_by(anime_params)
         review = Review.new(review_params)
         review.user_id = user.id
         review.anime_id = anime.id
         review.save
+        render json:review
     end
 
     def destroy

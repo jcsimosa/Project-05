@@ -27,9 +27,12 @@ function Home({logout}) {
 
     return (
         <div>
-            <h1>Popular Animes:</h1>
+            <div>       
+                <h3 className="text-4xl font-bold text-black-600" >
+                    Popular Animes:
+                </h3>
+            </div>    
             {animes.map((anime)=> <AnimeCard key={anime.animeId} anime={anime}/>)}
-
         </div>
     )
 }
