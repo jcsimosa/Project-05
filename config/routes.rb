@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   get "horror_animes", to: "animes#horror_from_api"
 
+  delete '/users', to: "users#destroy"
   # get "/animes/:animeId", to: "animes#show"
+  
 end

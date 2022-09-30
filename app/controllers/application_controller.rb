@@ -10,15 +10,15 @@ class ApplicationController < ActionController::API
 
 
     private
-        def not_found(exception)
-            render json: {error: "#{exception.model} not found"}, status: :not_found
-        end
+    def not_found(exception)
+        render json: {error: "#{exception.model} not found"}, status: :not_found
+    end
 
-        def invalid_record(exception)
-            render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
-        end 
+    def invalid_record(exception)
+        render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
+    end 
 
-        def authenticate_user
-            render json: {errors: "not authorized"}, status: :unauthorized unless current_user
-        end
+    def authenticate_user
+        render json: {errors: "not authorized"}, status: :unauthorized unless current_user
+    end
 end

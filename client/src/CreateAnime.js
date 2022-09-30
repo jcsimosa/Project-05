@@ -7,11 +7,18 @@ function CreateAnime() {
     const [animeImg, setAnimeImg] = useState('')
     const [releasedDate, setReleasedDate] = useState('')
 
-    console.log(animeTitle,animeImg,releasedDate)
+
+
+   
 
     const addNewAnime = (e) => {
         e.preventDefault()
-        console.log("hello")
+        const form = {
+            animeTitle,
+            animeImg,
+            releasedDate
+        }
+        console.log(form)
     }
 
     return(
@@ -37,9 +44,9 @@ function CreateAnime() {
                             <div className="flex flex-col items-start">
                                 <input
                                     type="text"
-                                    name="Anime Title"
+                                    name="animeTitle"
                                     required="animeTitle"
-                                    onChange={(e) => setAnimeTitle(e.target.value)}
+                                    onChange={(e) => setAnimeTitle(({[e.target.name]: e.target.value}))}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
@@ -54,9 +61,9 @@ function CreateAnime() {
                             <div className="flex flex-col items-start">
                                 <input
                                     type="text"
-                                    name="Image"
+                                    name="animeImg"
                                     required="animeImg"
-                                    onChange= {(e) => setAnimeImg(e.target.value)}
+                                    onChange= {(e) => setAnimeImg(({[e.target.name]: e.target.value}))}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
@@ -71,9 +78,9 @@ function CreateAnime() {
                             <div className="flex flex-col items-start">
                                 <input
                                     type="text"
-                                    name="released Date"
+                                    name="releasedDate"
                                     required="releasedDate"
-                                    onChange={(e) => setReleasedDate(e.target.value)}
+                                    onChange={(e) => setReleasedDate(({[e.target.name]: e.target.value}))}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>

@@ -1,11 +1,11 @@
 import react from "react"
 import { useState } from "react"
-import {json, Link} from "react-router-dom"
+import {json, Link, NavLink} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 
 
 
-function Login({setUser}){
+function Login({setUser, setCurrentUser}){
 
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -25,7 +25,8 @@ function Login({setUser}){
         })
             .then(r => {
                 if(r.ok){
-                    r.json().then(r => {
+                    r.json().then(userObj => {
+                        setCurrentUser(userObj)
                         setUser(true)
                         navigate('/home')
                 })
@@ -83,13 +84,9 @@ function Login({setUser}){
                             </div>
                         </div>
                         <div className="flex items-center justify-end mt-4">
-                            <a
-                                className="text-sm text-gray-600 underline hover:text-gray-900"
-                                href="/Signup"
-
-                            >
-                                or if you don't have an account yet
-                            </a>
+                                <NavLink to="/signup">
+                                    <p className="text-sm text-gray-600 underline hover:text-gray-900">Don't you have an account yet?</p>
+                                </NavLink>
                             <button
                                 type="submit"
                                 className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"

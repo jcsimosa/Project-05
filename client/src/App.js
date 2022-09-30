@@ -40,12 +40,14 @@ function App() {
 
   let navigate = useNavigate()
   
-  const logout = () => {
-    setCurrentUser(null);
-    setUser(false) 
-    fetch('/users', {method: "DELETE"})
-    .then(()=> navigate('/'))
-    }
+  const logout = () => { 
+    fetch('/users', {method: "delete"})
+    .then(()=> {
+      setCurrentUser(null)
+      setUser(false)
+      navigate("/")
+    })
+  }
 
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -90,8 +92,8 @@ function App() {
       {user ? <NavBar logout={logout}/>:null}
       <Routes>
 
-        <Route index element={ <Login setUser={setUser}/>} />
-        <Route path="signup" element= {<Signup setUser={setUser}/> } />
+        <Route index element={ <Login setUser={setUser} setCurrentUser={setCurrentUser}/>} />
+        <Route path="signup" element= {<Signup setUser={setUser} setCurrentUser={setCurrentUser}/> } />
         <Route path="Home"> 
           <Route index element= {
             <AuthRoute user={user}>
