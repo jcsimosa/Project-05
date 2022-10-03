@@ -1,6 +1,7 @@
 import React from "react";
-import {BrowserRouter,Link, Navigate, useNavigate, useParams}from "react-router-dom"
+import {BrowserRouter, useNavigate, useParams}from "react-router-dom"
 import{useState} from "react"
+
 
 
 
@@ -8,9 +9,11 @@ import{useState} from "react"
 function AnimeCard({anime}) {
 
     const [comment, setComment] = useState('')
-    const {id} = useParams()
-    
+    const params = useParams()
+    const id = params
+    const navigate = useNavigate()
     const [showForm, setShowForm] = useState(false)
+
 
     const userInput = e =>{
         setComment(pV => ({...pV,[e.target.name]: e.target.value}))
@@ -19,7 +22,7 @@ function AnimeCard({anime}) {
     const toggleForm = () => {
         setShowForm(!showForm)
     }
-
+    
     const submitcomment = e => {
         e.preventDefault()
         const data = {
@@ -34,23 +37,12 @@ function AnimeCard({anime}) {
         })
         .then(r => {
             if (r.ok){
-                r.json().then(console.log)
+                r.json().then(resp => {
+                    navigate(`/animes/${resp.anime.id}`)
+                })
             }
         })
-        e.target.reset();
         }
-
-        // const show = (e) => {
-        //     fetch(`/animes/${id}`)
-        //     .then(resp => {
-        //         if (resp.ok){
-        //             resp.json().then(r => {
-        //                 navigate(`/anime/${id}`)
-        //             })
-        //         }
-        //     },
-             
-        // },
 
         
     return (
@@ -59,11 +51,9 @@ function AnimeCard({anime}) {
 
 
             <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <Link to={`/animes/${id}`}>
-                <img className="w-full" src={anime.animeImg} alt={anime.animeId}/>
-            </Link>
+                <img className="w-full" src={anime.animeImg} alt={anime.animeId} onClick={toggleForm}/>
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2" onClick={toggleForm}>{anime.animeTitle}</div>
+                <div className="font-bold text-xl mb-2">{anime.animeTitle}</div>
                 <p className="text-gray-700 text-base">
                 released: {anime.releasedDate}
                 </p>

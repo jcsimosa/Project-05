@@ -19,7 +19,7 @@ const AuthRoute = ({children, user}) => {
   const navigate = useNavigate()
   useEffect ( () => {
     if (!user) {
-      navigate("/")
+      navigate("/home")
     }
   })
 
@@ -62,8 +62,8 @@ function App() {
       }
     });
   }, []);
-  console.log(user)
-  console.log(currentUser)
+  // console.log(user)
+  // console.log(currentUser)
 
   const [actionAnimes, setActionAnimes] = useState([])
   const [errors, setErrors] = useState('')  
@@ -106,7 +106,7 @@ function App() {
           <Route path="Horror" element={<HorrorAnime />}/>
           <Route path="Create" element={<CreateAnime />}/>
         </Route>
-          <Route path="animes/:id" element={<Anime />}/>
+        <Route path="animes/:id" element={<Anime />}/>
         <Route path='*' element={<NotFound />} />
 
       </Routes>

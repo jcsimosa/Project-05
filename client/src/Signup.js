@@ -29,6 +29,7 @@ function Signup({setUser,setCurrentUser}) {
                 r.json().then(userDataObj => {
                     setCurrentUser(userDataObj)
                     setUser(true)
+                    alert('Your User has been created succesfully')
                     navigate("/home")
                 })
             }else {

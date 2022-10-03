@@ -18,7 +18,16 @@ function CreateAnime() {
             animeImg,
             releasedDate
         }
-        console.log(form)
+        fetch('/animes', {
+            method: "POST",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(form)
+        })
+            .then(resp => {
+                if (resp.ok) {
+                    resp.json().then(console.log)
+                }
+            })
     }
 
     return(
@@ -46,7 +55,7 @@ function CreateAnime() {
                                     type="text"
                                     name="animeTitle"
                                     required="animeTitle"
-                                    onChange={(e) => setAnimeTitle(({[e.target.name]: e.target.value}))}
+                                    onChange={(e) => setAnimeTitle(e.target.value)}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
@@ -63,7 +72,7 @@ function CreateAnime() {
                                     type="text"
                                     name="animeImg"
                                     required="animeImg"
-                                    onChange= {(e) => setAnimeImg(({[e.target.name]: e.target.value}))}
+                                    onChange= {(e) => setAnimeImg(e.target.value)}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
@@ -80,7 +89,7 @@ function CreateAnime() {
                                     type="text"
                                     name="releasedDate"
                                     required="releasedDate"
-                                    onChange={(e) => setReleasedDate(({[e.target.name]: e.target.value}))}
+                                    onChange={(e) => setReleasedDate(e.target.value)}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
