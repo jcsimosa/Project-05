@@ -19,9 +19,9 @@ const AuthRoute = ({children, user}) => {
   const navigate = useNavigate()
   useEffect ( () => {
     if (!user) {
-      navigate("/home")
+      navigate("/")
     }
-  })
+  },[])
 
   return (
     <div>
@@ -77,7 +77,7 @@ function App() {
               resp.json().then(data => setErrors(data.error))
           }
       })
-  },[])
+  },[user])
 
   if (loading) {
     return (

@@ -120,7 +120,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
 
 
 
-             <>
+             {/* <>
                  <h4>{review.comment_username}</h4>
                  <h4>{review.comment}</h4>
                  <button onClick={handleDelete}>Delete Comment</button>
@@ -131,7 +131,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
                     <input type='submit' value="update"></input>
                 </form> : null
                 }
-            </>    
+            </>     */}
         </div>
     )
 }

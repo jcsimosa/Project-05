@@ -1,11 +1,13 @@
 import { useState } from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+
 
 
 function HorrorAnimeCard({anime}){
     
     const [comment, setComment] = useState('')
     const [showForm, setShowForm] = useState(false)
+    const navigate = useNavigate()
     
     const userInput = e =>{
         setComment(pV => ({...pV,[e.target.name]: e.target.value}))
@@ -16,7 +18,6 @@ function HorrorAnimeCard({anime}){
         setShowForm(!showForm)
     }
 
-    console.log(comment)
 
     const submitcomment = e => {
         e.preventDefault()
@@ -32,22 +33,24 @@ function HorrorAnimeCard({anime}){
         })
         .then(r => {
             if (r.ok){
-                r.json().then(console.log)
+                r.json().then(resp => {
+                    navigate(`/animes/${resp.anime.id}`)
+                })
             }
         })
-        e.target.reset();
+        
         }
+
+        // 
 
     return(
         <div>
 
 
             <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <Link to={`/animes/`}>
-                <img className="w-full" src={anime.animeImg} alt={anime.animeId}/>
-            </Link>
+            <img className="w-full" src={anime.animeImg} alt={anime.animeId} onClick={toggleForm}/>
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2" onClick={toggleForm}>{anime.animeTitle}</div>
+                <div className="font-bold text-xl mb-2" >{anime.animeTitle}</div>
                 <p className="text-gray-700 text-base">
                 released: {anime.releasedDate}
                 </p>

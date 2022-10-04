@@ -1,4 +1,5 @@
 class AnimesController < ApplicationController
+    # before_action :authorized? only [:create]
    
     def anime_from_api
        resp = RestClient.get('https://gogoanime.herokuapp.com/popular')
@@ -22,8 +23,9 @@ class AnimesController < ApplicationController
         render json: animes
     end
     def create 
-        anime = Anime.create()
-        render json: anime, status: :created
+        byebug
+        # anime = Anime.create()
+        # render json: anime, status: :created
     end
 
     private 

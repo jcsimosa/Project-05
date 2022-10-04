@@ -1,4 +1,4 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id,:comment,:comment_username
+  attributes :id,:comment,:comment_username,:anime
 
 end

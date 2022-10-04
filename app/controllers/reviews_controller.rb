@@ -10,7 +10,6 @@ class ReviewsController < ApplicationController
     end
     
     def create 
-        byebug
         user = current_user
         anime = Anime.find_or_create_by(anime_params)
         review = Review.new(review_params)
@@ -22,14 +21,19 @@ class ReviewsController < ApplicationController
 
     def destroy
         review = Review.find(params[:id])
-        review.destroy
-        head :no_content
+        if current_user[:username] === review.comment_username
+            review.destroy
+            head :no_content
+        else render json: {error: "you don't have the right to delete this comment"}, status: :forbidden
+        end
     end
     
     def update
         review = Review.find(params[:id])
+        if current_user[:username] === review.comment_username
         review.update!(review_params)
         render json: review, status: :accepted
+        end
     end
 
 
