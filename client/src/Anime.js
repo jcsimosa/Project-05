@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import Reviews from "./Reviews"
 
-function Anime() {
+function Anime({currentUser}) {
     
     const [anime, setAnime] = useState('')
     const [animeImg, setAnimeImg] = useState('')
@@ -47,7 +47,7 @@ function Anime() {
       
     
     const animereviews = reviews.map((review) => {
-        return <Reviews key={review.id} review={review} deleteComment={deleteComment} update={update}/>
+        return <Reviews key={review.id} review={review} deleteComment={deleteComment} update={update} currentUser={currentUser}/>
     })
 
     

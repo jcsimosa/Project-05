@@ -6,12 +6,12 @@ import AboutUs from "./AboutUs";
 import {useEffect,useState} from "react"
 
 
-function Home({logout}) {
+function Home({currentUser}) {
     
     const [animes, setAnimes] = useState([])
     const [errors, setErrors] = useState('')
 
-
+    
     useEffect(()=> {
         fetch("/all_animes")
         .then(resp => {
@@ -24,7 +24,6 @@ function Home({logout}) {
     },[])
 
    
-
     return (
         <div>
             <div>       

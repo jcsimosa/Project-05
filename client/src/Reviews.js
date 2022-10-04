@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 
-function Reviews({review,deleteComment,update}) {
+function Reviews({review,deleteComment,update,currentUser}) {
     
     const {id} = useParams()
     const [errors, setErrors] = useState('')
@@ -13,7 +13,8 @@ function Reviews({review,deleteComment,update}) {
     
 
 
-    console.log(review)
+    console.log('review',review.comment_username)
+    console.log('currentUser',currentUser.username)
 
     function handleDelete(){
         fetch(`/reviews/${review.id}`,{
@@ -21,7 +22,7 @@ function Reviews({review,deleteComment,update}) {
         })
         .then(res => {
           if(res.ok){
-            deleteComment(review.id)   
+            deleteComment(review.id)
           } else {
             res.json().then(data => setErrors(data.errors))
           }
@@ -69,7 +70,7 @@ function Reviews({review,deleteComment,update}) {
                 </div>
                 <p className="-mt-4 text-gray-500">{review.comment}</p>
                 
-                    
+                {currentUser.username === review.comment_username &&
                 <div className="justify-end mt-4">
                     <button
                     className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
@@ -83,8 +84,8 @@ function Reviews({review,deleteComment,update}) {
                     >
                         Edit comment
                     </button>
-                </div>
-                {toggleForm ? 
+                </div>}
+                {toggleForm &&
                 <form onSubmit={updateReview}>
                     <div className="mt-4">
                         <label
@@ -112,9 +113,9 @@ function Reviews({review,deleteComment,update}) {
                             </button>
                         </div>
                     </div>
-                </form> : null}
-
-            </div>
+                </form>}
+            </div> 
+                
 
 
 
