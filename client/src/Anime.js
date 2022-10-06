@@ -19,6 +19,7 @@ function Anime({currentUser}) {
         fetch(`/animes/${id}`)
         .then(r => r.json())
         .then(animeData => {
+            
             setAnime(animeData.animeTitle)
             setAnimeImg(animeData.animeImg)
             setReleasedDate(animeData.releasedDate)
@@ -27,7 +28,7 @@ function Anime({currentUser}) {
         })
     },[])
 
-
+    
     const deleteComment = (id) => setReviews(reviews.filter(p => p.id !== id))
 
 
@@ -54,8 +55,10 @@ function Anime({currentUser}) {
 
     return (
         <div>
-            <p>{anime.animeTitle}</p>
-            <img src={animeImg}></img>
+            <p>{anime}</p>
+            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                <img className="w-full" src={animeImg}/>
+            </div>    
             <p>Released Date:{releasedDate}</p>
             <h3>Comments:</h3>
             {animereviews}

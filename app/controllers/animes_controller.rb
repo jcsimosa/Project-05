@@ -1,6 +1,6 @@
 class AnimesController < ApplicationController
-    # before_action :authorized? only [:create]
-   
+    before_action :authorized?, only: :create
+    skip_before_action :authenticate_user, except: :index
     def anime_from_api
        resp = RestClient.get('https://gogoanime.herokuapp.com/popular')
        render json: resp
@@ -19,7 +19,7 @@ class AnimesController < ApplicationController
         render json: anime
     end
     def index 
-        animes = Anime.all 
+        animes = current_user.animes
         render json: animes
     end
     def create 

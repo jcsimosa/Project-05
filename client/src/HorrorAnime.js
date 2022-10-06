@@ -19,7 +19,9 @@ function HorrorAnime() {
 
     return(
         <div>
-            <h1>Horror Animes:</h1>
+            <h3 className="text-4xl font-bold text-black-600" >
+                Horror Animes:
+            </h3>
             {horrorAnimes.map((anime)=> <HorrorAnimeCard key={anime.animeId} anime={anime}/>)}
         </div>
     )

@@ -6,7 +6,9 @@ function ActionAnime({actionAnimes}) {
 
     return(
         <div>
-            <h1>Action Animes:</h1>
+            <h3 className="text-4xl font-bold text-black-600" >
+                Action Animes:
+            </h3>
            {actionAnimes.map((anime)=> <ActionAnimeCard key={anime.animeId} anime={anime}/>)}
         </div>
     )

@@ -11,10 +11,9 @@ function Reviews({review,deleteComment,update,currentUser}) {
     const [newComment, setNewComment] = useState('')
     const [render, setRender] = useState(false)
     
-
-
-    console.log('review',review.comment_username)
-    console.log('currentUser',currentUser.username)
+    console.log(review)
+    console.log(review.admin_username)
+    
 
     function handleDelete(){
         fetch(`/reviews/${review.id}`,{
@@ -69,7 +68,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
                     </div>
                 </div>
                 <p className="-mt-4 text-gray-500">{review.comment}</p>
-                
+                {/* {currentUser.username === review.comment_username || review.admin_username} */}
                 {currentUser.username === review.comment_username &&
                 <div className="justify-end mt-4">
                     <button
@@ -83,8 +82,8 @@ function Reviews({review,deleteComment,update,currentUser}) {
                     className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                     >
                         Edit comment
-                    </button>
-                </div>}
+                    </button> 
+                </div> }
                 {toggleForm &&
                 <form onSubmit={updateReview}>
                     <div className="mt-4">

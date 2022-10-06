@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
     
     def index 
-        reviews = Review.all 
+        reviews = Review.all
         render json: reviews
     end
     def show
@@ -21,7 +21,10 @@ class ReviewsController < ApplicationController
 
     def destroy
         review = Review.find(params[:id])
-        if current_user[:username] === review.comment_username
+        if current_user[:admin] === true
+            review.destroy
+            head :no_content
+        elsif current_user[:username] === review.comment_username
             review.destroy
             head :no_content
         else render json: {error: "you don't have the right to delete this comment"}, status: :forbidden

@@ -12,7 +12,7 @@ import HorrorAnime from './HorrorAnime';
 import NavBar from './NavBar';
 import Anime from './Anime';
 import CreateAnime from "./CreateAnime"
-
+import MyComments from './MyComments';
 
 
 const AuthRoute = ({children, user}) => {
@@ -105,6 +105,7 @@ function App() {
           <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
           <Route path="Horror" element={<HorrorAnime />}/>
           <Route path="Create" element={<CreateAnime />}/>
+          <Route path="Mycomments" element={<MyComments />} />
         </Route>
         <Route path="animes/:id" element={<Anime currentUser={currentUser}/>}/>
         <Route path='*' element={<NotFound />} />

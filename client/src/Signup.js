@@ -10,6 +10,7 @@ function Signup({setUser,setCurrentUser}) {
     const[username, setUsername] = useState ('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const [errors, setErrors] = useState('')
     
     
     const handleSubmit = (e)=> {
@@ -33,7 +34,7 @@ function Signup({setUser,setCurrentUser}) {
                     navigate("/home")
                 })
             }else {
-                r.json().then(json =>console.log(Object.entries(json.errors)))
+                r.json().then(json =>setErrors(Object.entries(json.errors)))
             }
         })
     }
@@ -42,11 +43,11 @@ function Signup({setUser,setCurrentUser}) {
         <div>
             <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
                 <div>
-                    <a href="/">
+                    
                         <h3 className="text-4xl font-bold text-black-600" >
                             To Watch
                         </h3>
-                    </a>
+        
                 </div>
                 <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
                     <form onSubmit={handleSubmit}>
@@ -116,6 +117,7 @@ function Signup({setUser,setCurrentUser}) {
                         </div>
                     </form>
                 </div>
+                {errors?errors.map(e => <div>{e[0]+': ' + e[1]}</div>):null}
             </div>
         
 
@@ -128,7 +130,7 @@ function Signup({setUser,setCurrentUser}) {
 
 
 
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <input required="Name" type="text" placeholder="Name" onChange={e => setName(e.target.value)}></input>
                 <br />
                 <input type="text" required="Username" placeholder="Username" onChange={e => setUsername(e.target.value)}></input>
@@ -138,7 +140,7 @@ function Signup({setUser,setCurrentUser}) {
                 <input type="submit"></input>
             </form> 
             
-            <div>or if you have an account,<Link to="/">Click here</Link> </div>      
+            <div>or if you have an account,<Link to="/">Click here</Link> </div>       */}
         </div>
     )
 }   

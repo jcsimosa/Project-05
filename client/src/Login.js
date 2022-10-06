@@ -30,6 +30,8 @@ function Login({setUser, setCurrentUser}){
                         setUser(true)
                         navigate('/home')
                 })
+            }else {
+                r.json().then(json =>setErrors(Object.entries(json.errors)))
             }
         })
     }
@@ -96,6 +98,7 @@ function Login({setUser, setCurrentUser}){
                         </div>
                     </form>
                 </div>
+                {errors?errors.map(e => <div>{e[0]+': ' + e[1]}</div>):null}
             </div>
 
 
