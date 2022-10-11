@@ -11,7 +11,7 @@ function Anime({currentUser}) {
     const params = useParams()
     const {id} = params
     const [reviews, setReviews] = useState([])
-    const [users, setUsers] = useState([])
+    // const [users, setUsers] = useState([])
     // const{reviewid} = useParams()
    
     
@@ -24,11 +24,10 @@ function Anime({currentUser}) {
             setAnimeImg(animeData.animeImg)
             setReleasedDate(animeData.releasedDate)
             setReviews(animeData.reviews)
-            setUsers(animeData.users)
         })
     },[])
 
-    
+  
     const deleteComment = (id) => setReviews(reviews.filter(p => p.id !== id))
 
 
@@ -57,7 +56,7 @@ function Anime({currentUser}) {
         <div>
             <p>{anime}</p>
             <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src={animeImg}/>
+                <img className="w-full" src={animeImg} alt='img-01'/>
             </div>    
             <p>Released Date:{releasedDate}</p>
             <h3>Comments:</h3>

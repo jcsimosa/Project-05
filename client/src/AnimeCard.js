@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, useNavigate, useParams}from "react-router-dom"
+import {useNavigate}from "react-router-dom"
 import{useState} from "react"
 
 
@@ -9,8 +9,8 @@ import{useState} from "react"
 function AnimeCard({anime}) {
 
     const [comment, setComment] = useState('')
-    const params = useParams()
-    const id = params
+    // const params = useParams()
+    // const id = params
     const navigate = useNavigate()
     const [showForm, setShowForm] = useState(false)
 
@@ -48,8 +48,6 @@ function AnimeCard({anime}) {
     return (
         
         <div>
-
-
             <div className="max-w-sm rounded overflow-hidden shadow-lg">
                 <img className="w-full" src={anime.animeImg} alt={anime.animeId} onClick={toggleForm}/>
             <div className="px-6 py-4">

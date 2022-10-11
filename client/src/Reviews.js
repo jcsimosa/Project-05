@@ -11,8 +11,8 @@ function Reviews({review,deleteComment,update,currentUser}) {
     const [newComment, setNewComment] = useState('')
     const [render, setRender] = useState(false)
     
+    // console.log(review)
     console.log(review)
-    console.log(review.admin_username)
     
 
     function handleDelete(){
@@ -54,6 +54,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
     function showForm(e) {
         setToggleForm(!toggleForm)
     }
+    debugger
     return (
         <div>
 
@@ -68,8 +69,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
                     </div>
                 </div>
                 <p className="-mt-4 text-gray-500">{review.comment}</p>
-                {/* {currentUser.username === review.comment_username || review.admin_username} */}
-                {currentUser.username === review.comment_username &&
+                {(currentUser.id === review.user_id || currentUser.admin) &&  
                 <div className="justify-end mt-4">
                     <button
                     className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
@@ -77,12 +77,13 @@ function Reviews({review,deleteComment,update,currentUser}) {
                     >
                        delete
                     </button>
+                    {(!currentUser.admin || currentUser.admin && review.user_id === currentUser.id) &&
                     <button
                     onClick={showForm}
                     className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                     >
                         Edit comment
-                    </button> 
+                    </button> }
                 </div> }
                 {toggleForm &&
                 <form onSubmit={updateReview}>
