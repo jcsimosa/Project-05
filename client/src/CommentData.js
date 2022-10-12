@@ -2,7 +2,7 @@ import React from "react";
 
 function CommentData({commentobj}){
 
-    console.log(commentobj.reviews)
+
     const reviews = commentobj.reviews.map((review)=> {
        return <p key={review.id}>You ({review.comment_username}) has comment this anime: " {review.comment} "</p>
     })

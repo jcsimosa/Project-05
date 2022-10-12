@@ -1,17 +1,16 @@
 import React, { useState } from "react"
 
 
-function CreateAnime() {
+function CreateAnime({newAnime}) {
     
+    const [url, setUrl] = useState('')
     const [animeTitle, setAnimeTitle] = useState('')
     const [animeImg, setAnimeImg] = useState('')
     const [releasedDate, setReleasedDate] = useState('')
+    const [showForm, setShowForm] = useState(false)
 
 
-
-   
-
-    const addNewAnime = (e) => {
+    const addNewPopularAnime = (e) => {
         e.preventDefault()
         const form = {
             animeTitle,
@@ -25,14 +24,30 @@ function CreateAnime() {
         })
             .then(resp => {
                 if (resp.ok) {
-                    resp.json().then(console.log)
+                    resp.json().then(newObj => {
+                        newAnime(newObj)
+                        alert("Anime create Sucesfully")
+                    })
                 }
+                e.target.reset()
             })
     }
 
+
+   
     return(
         <div>
-
+            <div className="flex items-center justify-center mt-4">
+                <button
+                    onClick={(e) => setShowForm(pV => !pV)}
+                    type="submit"
+                    className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
+                >
+                    Create Popular Anime
+                </button>
+            </div>
+            
+            {showForm === true &&
             <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
                 <div>
                     
@@ -42,7 +57,7 @@ function CreateAnime() {
                     
                 </div>
                 <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
-                    <form onSubmit={addNewAnime}>
+                    <form onSubmit={addNewPopularAnime}>
                         <div className="mt-4">
                             <label
                                 htmlFor="animeTitle"
@@ -104,25 +119,7 @@ function CreateAnime() {
                         </div>
                     </form>
                 </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <h1> Create Anime:</h1>
-            <form onSubmit={addNewAnime}>
-                <input required="animeTitle " placeholder="Title" onChange={(e) => setAnimeTitle(e.target.value)}></input>
-                <input required="animeImg" placeholder="Image" onChange={(e) => setAnimeImg(e.target.value)}></input>
-                <input required="releasedDate" placeholder="Released Date" onChange={(e) => setReleasedDate(e.target.value)}></input>
-            </form>
+            </div>}
         </div>
     )
 }

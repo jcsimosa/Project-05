@@ -35,6 +35,8 @@ function App() {
   
   const [user, setUser] = useState(false)
   const [loading , setLoading] = useState(true)
+  const [animes, setAnimes] = useState([])
+  const [error, setError] = useState('')
 
   const[currentUser, setCurrentUser] = useState(null)
 
@@ -63,6 +65,19 @@ function App() {
     });
   }, []);
   // console.log(user)
+
+
+
+  useEffect(()=> {
+    fetch("/all_animes")
+    .then(resp => {
+        if (resp.ok){
+            resp.json().then(setAnimes)
+        } else {
+            resp.json().then(data => setError(data.error))
+        }
+    })
+},[])
   
 
   const [actionAnimes, setActionAnimes] = useState([])
@@ -79,6 +94,11 @@ function App() {
       })
   },[user])
 
+
+  const newAnime = (newAnimeObj) => {
+    setAnimes(animes => [newAnimeObj, ...animes])
+}
+
   if (loading) {
     return (
       <>
@@ -89,7 +109,7 @@ function App() {
   return (
 
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-      {user ? <NavBar logout={logout}/>:null}
+      {user ? <NavBar logout={logout} currentUser={currentUser}/>:null}
       <Routes>
 
         <Route index element={ <Login setUser={setUser} setCurrentUser={setCurrentUser}/>} />
@@ -97,14 +117,14 @@ function App() {
         <Route path="Home"> 
           <Route index element= {
             <AuthRoute user={user}>
-              <Home />
+              <Home animes={animes}/>
             </AuthRoute>
           }/>
 
           <Route path="aboutus" element= {<AboutUs /> } />
           <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
           <Route path="Horror" element={<HorrorAnime />}/>
-          <Route path="Create" element={<CreateAnime />}/>
+          <Route path="Create" element={<CreateAnime newAnime={newAnime}/>}/>
           <Route path="Mycomments" element={<MyComments />} />
         </Route>
         <Route path="animes/:id" element={<Anime currentUser={currentUser}/>}/>

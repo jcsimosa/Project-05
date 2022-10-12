@@ -6,24 +6,16 @@ import AboutUs from "./AboutUs";
 import {useEffect,useState} from "react"
 
 
-function Home({currentUser}) {
+function Home({animes}) {
     
-    const [animes, setAnimes] = useState([])
-    const [errors, setErrors] = useState('')
+    
 
     
-    useEffect(()=> {
-        fetch("/all_animes")
-        .then(resp => {
-            if (resp.ok){
-                resp.json().then(setAnimes)
-            } else {
-                resp.json().then(data => setErrors(data.error))
-            }
-        })
-    },[])
+   
 
    
+
+
     return (
         <div>
             <div>       

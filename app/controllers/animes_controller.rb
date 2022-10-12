@@ -22,10 +22,9 @@ class AnimesController < ApplicationController
         animes = current_user.animes
         render json: animes
     end
-    def create 
-        byebug
-        # anime = Anime.create()
-        # render json: anime, status: :created
+    def create
+        anime = Anime.create(anime_params)
+        render json: anime, status: :created
     end
 
     private 
