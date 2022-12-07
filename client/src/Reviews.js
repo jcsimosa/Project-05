@@ -11,8 +11,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
     const [newComment, setNewComment] = useState('')
     const [render, setRender] = useState(false)
     
-    // console.log(review)
-    console.log(review)
+    
     
 
     function handleDelete(){
@@ -54,7 +53,7 @@ function Reviews({review,deleteComment,update,currentUser}) {
     function showForm(e) {
         setToggleForm(!toggleForm)
     }
-    debugger
+    
     return (
         <div>
 

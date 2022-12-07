@@ -11,13 +11,18 @@ class ReviewsController < ApplicationController
     
     def create 
         user = current_user
-        anime = Anime.find_or_create_by(anime_params)
+        anime = Anime.find_by(id: review_params[:anime_id])
         review = Review.new(review_params)
         review.user_id = user.id
         review.anime_id = anime.id
         review.save
         render json:review
     end
+    # def create 
+    #     byebug
+    #     review = Review.create!(review_params)
+    #     render json: review, status: :created
+    # end
 
     def destroy
         review = Review.find(params[:id])
@@ -43,7 +48,7 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.permit(:comment)
+        params.permit(:comment,:anime_id)
     end
     def anime_params
         params.permit(:animeTitle,:animeImg,:releasedDate)

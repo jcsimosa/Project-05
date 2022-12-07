@@ -69,7 +69,7 @@ function App() {
 
 
   useEffect(()=> {
-    fetch("/all_animes")
+    fetch("/all")
     .then(resp => {
         if (resp.ok){
             resp.json().then(setAnimes)
@@ -79,20 +79,20 @@ function App() {
     })
 },[])
   
-
+  console.log(animes)
   const [actionAnimes, setActionAnimes] = useState([])
   const [errors, setErrors] = useState('')  
 
-  useEffect(()=> {
-      fetch("/action_animes")
-      .then(resp => {
-          if (resp.ok){
-              resp.json().then(setActionAnimes)
-          } else {
-              resp.json().then(data => setErrors(data.error))
-          }
-      })
-  },[user])
+  // useEffect(()=> {
+  //     fetch("action")
+  //     .then(resp => {
+  //         if (resp.ok){
+  //             resp.json().then(setActionAnimes)
+  //         } else {
+  //             resp.json().then(data => setErrors(data.error))
+  //         }
+  //     })
+  // },[user])
 
 
   const newAnime = (newAnimeObj) => {
@@ -121,9 +121,9 @@ function App() {
             </AuthRoute>
           }/>
 
-          <Route path="aboutus" element= {<AboutUs /> } />
-          <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
-          <Route path="Horror" element={<HorrorAnime />}/>
+          <Route path="aboutus" element= {<AboutUs/> } />
+          {/* <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
+          <Route path="Horror" element={<HorrorAnime />}/> */}
           <Route path="Create" element={<CreateAnime newAnime={newAnime}/>}/>
           <Route path="Mycomments" element={<MyComments />} />
         </Route>

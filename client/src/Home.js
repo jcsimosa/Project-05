@@ -1,9 +1,6 @@
 import React from "react";
 import AnimeCard from "./AnimeCard";
-import NavBar from "./NavBar";
-import {Routes, Route, Outlet} from "react-router-dom"
-import AboutUs from "./AboutUs";
-import {useEffect,useState} from "react"
+
 
 
 function Home({animes}) {
@@ -23,7 +20,7 @@ function Home({animes}) {
                     Popular Animes:
                 </h3>
             </div>    
-            {animes.map((anime)=> <AnimeCard key={anime.animeId} anime={anime}/>)}
+            <AnimeCard animes={animes}/>
         </div>
     )
 }

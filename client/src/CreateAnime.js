@@ -46,8 +46,6 @@ function CreateAnime({newAnime}) {
                     Create Popular Anime
                 </button>
             </div>
-            
-            {showForm === true &&
             <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
                 <div>
                     
@@ -119,7 +117,7 @@ function CreateAnime({newAnime}) {
                         </div>
                     </form>
                 </div>
-            </div>}
+            </div>
         </div>
     )
 }
