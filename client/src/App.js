@@ -7,12 +7,11 @@ import { NotFound } from './NotFound';
 import Signup from './Signup';
 import Home from './Home';
 import AboutUs from './AboutUs';
-import ActionAnime from './ActionAnime';
-import HorrorAnime from './HorrorAnime';
 import NavBar from './NavBar';
 import Anime from './Anime';
 import CreateAnime from "./CreateAnime"
 import MyComments from './MyComments';
+import { stringify } from 'postcss';
 
 
 const AuthRoute = ({children, user}) => {
@@ -37,7 +36,7 @@ function App() {
   const [loading , setLoading] = useState(true)
   const [animes, setAnimes] = useState([])
   const [error, setError] = useState('')
-
+  const [filter, setFilter] = useState('')
   const[currentUser, setCurrentUser] = useState(null)
 
   let navigate = useNavigate()
@@ -78,22 +77,22 @@ function App() {
         }
     })
 },[])
-  
-  console.log(animes)
-  const [actionAnimes, setActionAnimes] = useState([])
-  const [errors, setErrors] = useState('')  
 
-  // useEffect(()=> {
-  //     fetch("action")
-  //     .then(resp => {
-  //         if (resp.ok){
-  //             resp.json().then(setActionAnimes)
-  //         } else {
-  //             resp.json().then(data => setErrors(data.error))
-  //         }
-  //     })
-  // },[user])
 
+    const filteredAnime = animes.filter((anime) => {
+      // console.log(anime.animeTitle)
+      if (filter === ''){
+        return true
+      } 
+      else {
+        return anime.animeTitle.toLowerCase().includes(filter.toLocaleLowerCase())
+      }
+    })
+
+   const searchAnime = obj => {
+      setFilter(obj)
+   }
+   
 
   const newAnime = (newAnimeObj) => {
     setAnimes(animes => [newAnimeObj, ...animes])
@@ -109,7 +108,7 @@ function App() {
   return (
 
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-      {user ? <NavBar logout={logout} currentUser={currentUser}/>:null}
+      {user ? <NavBar logout={logout} currentUser={currentUser} searchAnime={searchAnime}/>:null}
       <Routes>
 
         <Route index element={ <Login setUser={setUser} setCurrentUser={setCurrentUser}/>} />
@@ -117,7 +116,7 @@ function App() {
         <Route path="Home"> 
           <Route index element= {
             <AuthRoute user={user}>
-              <Home animes={animes}/>
+              <Home animes={filteredAnime}/>
             </AuthRoute>
           }/>
 

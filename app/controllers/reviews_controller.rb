@@ -18,12 +18,7 @@ class ReviewsController < ApplicationController
         review.save
         render json:review
     end
-    # def create 
-    #     byebug
-    #     review = Review.create!(review_params)
-    #     render json: review, status: :created
-    # end
-
+    
     def destroy
         review = Review.find(params[:id])
         if current_user[:admin] === true

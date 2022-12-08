@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {Route,Routes} from "react-router-dom"
 import AboutUs from "./AboutUs";
 import {Link} from "react-router-dom"
 
-function NavBar({logout, currentUser}) {
-    
+function NavBar({logout, currentUser,searchAnime}) {
     
     console.log(currentUser)
+    const [searchbar, setSearchBar] = useState('')
+
+    searchAnime(searchbar)
+
+   
     return (
         <div>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -19,8 +23,24 @@ function NavBar({logout, currentUser}) {
                             
                             {currentUser.admin &&
                             <li>
-                                <Link to="/home/Create" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Create Anime</Link>
+                                <Link to="/home/Create" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-black-500 md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Create Anime</Link>
                             </li>}
+                            <li>
+                                <div className="flex items-center">
+                                    <div className="flex border border-purple-200 rounded">
+                                        <input
+                                            type="text"
+                                            className="block w-full px-4 py-1 text-black-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                            placeholder="Search..."
+                                            onChange={(e) => setSearchBar(e.target.value)}
+                                        />
+                                        {/* <button className="px-4 text-white bg-purple-600 border-l rounded "
+                                        >
+                                            Search
+                                        </button> */}
+                                    </div>  
+                                </div>  
+                            </li>
 
                             <li>
                                 <Link to="/home/Mycomments" className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">My comments</Link>
