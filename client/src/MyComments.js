@@ -2,10 +2,12 @@ import { comment } from "postcss";
 import React, { useEffect, useState } from "react";
 import CommentData from "./CommentData";
 
-function MyComments(){
+function MyComments({currentUser}){
 
     const [animesCommented , setAnimeCommented] = useState([])
     const [errors, setErrors] = useState('')
+
+   
     
     useEffect(() => {
         fetch("/animes")
@@ -18,10 +20,9 @@ function MyComments(){
         })
     },[])
     
-    
 
     const mycomments = animesCommented.map((commentobj) => {
-        return <CommentData key={commentobj.id} commentobj={commentobj}/>
+        return <CommentData key={commentobj.id} currentUser={currentUser} commentobj={commentobj}/>
     })
 
     return(

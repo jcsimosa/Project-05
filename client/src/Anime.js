@@ -73,44 +73,51 @@ function Anime({currentUser}) {
         return <Reviews key={review.id} review={review} deleteComment={deleteComment} update={update} currentUser={currentUser}/>
     })
 
-    
+    console.log(currentUser.admin)
     return (
         <div>
-            <div class="flex items-center min-h-screen bg-gray-50">
-                <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-                    <h1 class="flex items-center font-bold text-center text-2xl">{animeData.animeTitle}</h1>
-                    <div class="flex flex-col md:flex-row">
-                    <div class="h-32 md:h-auto md:w-1/2">
-                        <img class="object-cover w-full h-full" src={animeData.animeImg}
+            <div className="flex items-center min-h-screen bg-gray-50">
+                <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+                    <h1 className="flex items-center font-bold text-center text-2xl">{animeData.animeTitle}</h1>
+                    <div className="flex flex-col md:flex-row">
+                    <div className="h-32 md:h-auto md:w-1/2">
+                        <img className="object-cover w-full h-full" src={animeData.animeImg}
                         alt="img" 
                         onClick={toggleForm}
                         />
                     </div>
                     {showForm ? 
-                        <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-                            <div class="w-full">
-                            <div class="flex justify-center">
+                        <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                            <div className="w-full">
+                            <div className="flex justify-center">
                             </div>
-                            <h1 class="mb-4 text-2xl font-bold text-center text-gray-700">
+                            <h1 className="mb-4 text-2xl font-bold text-center text-gray-700">
                                 Create your Comment:
                             </h1>
                             <div>
                                 <form onSubmit={submitcomment}>
-                                    <label class="block text-sm">
+                                    <label className="block text-sm">
                                     Comment:
                                     </label>
                                     <input 
-                                    class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                    className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                                     placeholder="Comment Here"
                                     required 
                                     onChange={userInput}
                                     name="comment"
                                     />
                                     <button
-                                        class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                                        className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                                         >
                                         Comment
                                     </button>
+                                    {currentUser.admin ? 
+                                    <button
+                                        className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue"
+                                        >
+                                        Delete
+                                    </button>
+                                    : null}
                                 </form>    
                             </div>
                         </div>

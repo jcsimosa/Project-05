@@ -2,10 +2,7 @@ import React from "react";
 
 function CommentData({commentobj}){
 
-
-    const reviews = commentobj.reviews.map((review)=> {
-       return <p key={review.id}>You ({review.comment_username}) has comment this anime: " {review.comment} "</p>
-    })
+ 
 
     return (
         <div>
@@ -16,7 +13,7 @@ function CommentData({commentobj}){
                     <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
                     <span className="sr-only">Check icon</span>
                 </div>
-                <div className="ml-3 text-sm font-normal">{reviews}</div>
+                <div className="ml-3 text-sm font-normal">You have Comment this Anime</div>
             </div>
 
 

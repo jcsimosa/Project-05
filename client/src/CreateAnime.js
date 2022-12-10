@@ -1,14 +1,16 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 function CreateAnime({newAnime}) {
     
-    const [url, setUrl] = useState('')
+    
     const [animeTitle, setAnimeTitle] = useState('')
     const [animeImg, setAnimeImg] = useState('')
     const [releasedDate, setReleasedDate] = useState('')
     const [showForm, setShowForm] = useState(false)
 
+    const navigate = useNavigate()
 
     const addNewPopularAnime = (e) => {
         e.preventDefault()
@@ -27,6 +29,7 @@ function CreateAnime({newAnime}) {
                     resp.json().then(newObj => {
                         newAnime(newObj)
                         alert("Anime create Sucesfully")
+                        navigate("/")
                     })
                 }
                 e.target.reset()
@@ -38,13 +41,6 @@ function CreateAnime({newAnime}) {
     return(
         <div>
             <div className="flex items-center justify-center mt-4">
-                <button
-                    onClick={(e) => setShowForm(pV => !pV)}
-                    type="submit"
-                    className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
-                >
-                    Create Popular Anime
-                </button>
             </div>
             <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
                 <div>

@@ -95,7 +95,7 @@ function App() {
    
 
   const newAnime = (newAnimeObj) => {
-    setAnimes(animes => [newAnimeObj, ...animes])
+    setAnimes(animes => [...animes, newAnimeObj])
 }
 
   if (loading) {
@@ -124,7 +124,7 @@ function App() {
           {/* <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
           <Route path="Horror" element={<HorrorAnime />}/> */}
           <Route path="Create" element={<CreateAnime newAnime={newAnime}/>}/>
-          <Route path="Mycomments" element={<MyComments />} />
+          <Route path="Mycomments" element={<MyComments currentUser={currentUser}/>} />
         </Route>
         <Route path="animes/:id" element={<Anime currentUser={currentUser}/>}/>
         <Route path='*' element={<NotFound />} />

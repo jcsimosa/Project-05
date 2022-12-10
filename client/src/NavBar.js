@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 function NavBar({logout, currentUser,searchAnime}) {
     
-    console.log(currentUser)
+  
     const [searchbar, setSearchBar] = useState('')
 
     searchAnime(searchbar)

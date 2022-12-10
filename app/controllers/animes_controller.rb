@@ -30,7 +30,13 @@ class AnimesController < ApplicationController
         anime = Anime.create!(anime_params)
         render json: anime, status: :created
     end
-
+    def destroy 
+        anime = Anime.find(params[:id])
+        if current_user[:admin] === true
+        anime.destroy
+        head :no_content
+        end
+    end
     private 
     def anime_params
         params.permit(:animeTitle,:animeImg,:releasedDate)

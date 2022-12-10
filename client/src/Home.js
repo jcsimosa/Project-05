@@ -4,13 +4,6 @@ import AnimeCard from "./AnimeCard";
 
 
 function Home({animes}) {
-    
-    
-
-    
-   
-
-   
 
 
     return (
