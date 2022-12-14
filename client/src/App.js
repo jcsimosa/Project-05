@@ -11,7 +11,8 @@ import NavBar from './NavBar';
 import Anime from './Anime';
 import CreateAnime from "./CreateAnime"
 import MyComments from './MyComments';
-import { stringify } from 'postcss';
+import Users from './Users';
+
 
 
 const AuthRoute = ({children, user}) => {
@@ -37,14 +38,14 @@ function App() {
   const [animes, setAnimes] = useState([])
   const [error, setError] = useState('')
   const [filter, setFilter] = useState('')
-  const[currentUser, setCurrentUser] = useState(null)
+  const[currentUser, setCurrentUser] = useState({id:"", username:"",admin: false})
 
   let navigate = useNavigate()
   
   const logout = () => { 
     fetch('/users', {method: "delete"})
     .then(()=> {
-      setCurrentUser(null)
+      setCurrentUser({id:"", username:"",admin: false})
       setUser(false)
       navigate("/")
     })
@@ -80,7 +81,6 @@ function App() {
 
 
     const filteredAnime = animes.filter((anime) => {
-      // console.log(anime.animeTitle)
       if (filter === ''){
         return true
       } 
@@ -111,7 +111,7 @@ function App() {
       {user ? <NavBar logout={logout} currentUser={currentUser} searchAnime={searchAnime}/>:null}
       <Routes>
 
-        <Route index element={ <Login setUser={setUser} setCurrentUser={setCurrentUser}/>} />
+        <Route index element={ <Login setUser={setUser} setCurrentUser={setCurrentUser} currentUser={currentUser}/>} />
         <Route path="signup" element= {<Signup setUser={setUser} setCurrentUser={setCurrentUser}/> } />
         <Route path="Home"> 
           <Route index element= {
@@ -121,9 +121,8 @@ function App() {
           }/>
 
           <Route path="aboutus" element= {<AboutUs/> } />
-          {/* <Route path="Action" element={<ActionAnime actionAnimes={actionAnimes}/>}/>
-          <Route path="Horror" element={<HorrorAnime />}/> */}
           <Route path="Create" element={<CreateAnime newAnime={newAnime}/>}/>
+          <Route path="Users" element={<Users/>}/>
           <Route path="Mycomments" element={<MyComments currentUser={currentUser}/>} />
         </Route>
         <Route path="animes/:id" element={<Anime currentUser={currentUser}/>}/>

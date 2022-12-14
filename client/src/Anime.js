@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom'
+import {useNavigate, useParams } from 'react-router-dom'
 import Reviews from "./Reviews"
 
 function Anime({currentUser}) {
@@ -8,18 +8,15 @@ function Anime({currentUser}) {
     const params = useParams()
     const {id} = params
     const [reviews, setReviews] = useState([])
-    const [showForm, setShowForm] = useState(false)
     const [comment, setComment] = useState('')
     const [animeData, setAnimeData] = useState({animeTitle:"",animeImg:"",releasedDate:"" })
-
+    const navigate = useNavigate()
 
     const userInput = e =>{
         setComment(pV => ({...pV,[e.target.name]: e.target.value}))
     }
 
-    const toggleForm = () => {
-        setShowForm(!showForm)
-    }
+    
     
     const submitcomment = e => {
         e.preventDefault()
@@ -57,6 +54,18 @@ function Anime({currentUser}) {
     
     const deleteComment = (id) => setReviews(reviews.filter(p => p.id !== id))
 
+    const deleteAnime = () => {
+        fetch(`/animes/${id}`, {
+            method: 'DELETE'
+        })
+        .then(resp => {
+            if (resp.ok) {
+                navigate("/home")
+                alert('succesfully deleted')
+            }
+        })
+        
+    }
 
    
     const update = (updatedReview) => setReviews(obj => {
@@ -72,8 +81,7 @@ function Anime({currentUser}) {
     const animereviews = reviews.map((review) => {
         return <Reviews key={review.id} review={review} deleteComment={deleteComment} update={update} currentUser={currentUser}/>
     })
-
-    console.log(currentUser.admin)
+    
     return (
         <div>
             <div className="flex items-center min-h-screen bg-gray-50">
@@ -83,10 +91,9 @@ function Anime({currentUser}) {
                     <div className="h-32 md:h-auto md:w-1/2">
                         <img className="object-cover w-full h-full" src={animeData.animeImg}
                         alt="img" 
-                        onClick={toggleForm}
                         />
                     </div>
-                    {showForm ? 
+                    
                         <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                             <div className="w-full">
                             <div className="flex justify-center">
@@ -107,22 +114,23 @@ function Anime({currentUser}) {
                                     name="comment"
                                     />
                                     <button
-                                        className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                                        className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                                         >
                                         Comment
-                                    </button>
-                                    {currentUser.admin ? 
+                                    </button> 
+                                    </form>    
+                                    {currentUser.admin === true &&
                                     <button
                                         className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-blue"
+                                        onClick={deleteAnime}
                                         >
                                         Delete
-                                    </button>
-                                    : null}
-                                </form>    
+                                    </button> }
+                                    
                             </div>
                         </div>
                     </div> 
-                : null}
+                
                 </div>
             </div>
         </div>

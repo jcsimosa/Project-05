@@ -14,11 +14,17 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         render json: user, status: :created
     end
-
-    def destroy 
-       session.delete :user_id
-       head :no_content
+   
+    def destroy  
+        user = User.find(params[:id])
+        if current_user[:admin] === true 
+            user.destroy
+            head :no_content
+        else render json: {error: "you don't have the credentials to do this"}, status: :forbidden
+        end
     end
+
+    
     
     private 
     def user_params

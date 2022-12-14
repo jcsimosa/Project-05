@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom"
 
 
 
-function Login({setUser, setCurrentUser}){
+function Login({setUser, setCurrentUser,currentUser}){
 
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -37,7 +37,7 @@ function Login({setUser, setCurrentUser}){
     }
 
 
-  
+    if (currentUser.id){navigate('/home')}
     return (
 
          <div>

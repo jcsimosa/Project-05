@@ -29,7 +29,7 @@ function CreateAnime({newAnime}) {
                     resp.json().then(newObj => {
                         newAnime(newObj)
                         alert("Anime create Sucesfully")
-                        navigate("/")
+                        navigate("/home")
                     })
                 }
                 e.target.reset()

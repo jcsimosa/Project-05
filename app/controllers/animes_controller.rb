@@ -27,14 +27,18 @@ class AnimesController < ApplicationController
         render json: animes
     end
     def create
-        anime = Anime.create!(anime_params)
-        render json: anime, status: :created
+        if current_user[:admin] === true
+            anime = Anime.create!(anime_params)
+            render json: anime, status: :created
+        else render json: {error: "you don't have the credentials to be here"}, status: :forbidden
+        end
     end
     def destroy 
         anime = Anime.find(params[:id])
         if current_user[:admin] === true
-        anime.destroy
-        head :no_content
+            anime.destroy
+            head :no_content
+        else render json: {error: "you don't have the credentials to do this"}, status: :forbidden
         end
     end
     private 
